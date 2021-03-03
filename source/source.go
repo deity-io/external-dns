@@ -42,6 +42,8 @@ const (
 	accessAnnotationKey = "external-dns.alpha.kubernetes.io/access"
 	// The annotation used for defining the desired ingress target
 	targetAnnotationKey = "external-dns.alpha.kubernetes.io/target"
+	// Value for target annotation to skip ingress
+	targetAnnotationSkipValue = "-"
 	// The annotation used for defining the desired DNS record TTL
 	ttlAnnotationKey = "external-dns.alpha.kubernetes.io/ttl"
 	// The annotation used for switching to the alias record types e. g. AWS Alias records instead of a normal CNAME

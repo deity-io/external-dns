@@ -947,6 +947,24 @@ func testIngressEndpoints(t *testing.T) {
 			fqdnTemplate: "{{.Name}}.ext-dns.test.com",
 		},
 		{
+			title:           "Ingress with skip target annotation",
+			targetNamespace: "",
+			ingressItems: []fakeIngress{
+				{
+					name:      "fake1",
+					namespace: namespace,
+					annotations: map[string]string{
+						targetAnnotationKey: "-",
+					},
+					dnsnames:  []string{},
+					ips:       []string{},
+					hostnames: []string{},
+				},
+			},
+			expected:     []*endpoint.Endpoint{},
+			fqdnTemplate: "{{.Name}}.ext-dns.test.com",
+		},
+		{
 			title:           "Ingress with empty annotation",
 			targetNamespace: "",
 			ingressItems: []fakeIngress{

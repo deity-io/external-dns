@@ -134,6 +134,13 @@ func (sc *ingressSource) Endpoints(ctx context.Context) ([]*endpoint.Endpoint, e
 			continue
 		}
 
+		target, ok := ing.Annotations[targetAnnotationKey]
+		if ok && target == targetAnnotationSkipValue {
+			log.Debugf("Skipping ingress %s/%s because target value match special skip value pattern, found: %s, pattern: %s",
+				ing.Namespace, ing.Name, target, targetAnnotationSkipValue)
+			continue
+		}
+
 		ingEndpoints := endpointsFromIngress(ing, sc.ignoreHostnameAnnotation, sc.ignoreIngressTLSSpec)
 
 		// apply template if host is missing on ingress
